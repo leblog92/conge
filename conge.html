@@ -14,7 +14,7 @@
 	}
 
 	.noPrint{
-		text-align:center;
+		text-align:right;
 		position:fixed;
 		top:8px;
 		right:8px;
@@ -33,7 +33,6 @@
 	#page{
 		width:800px;
 		height:1132px;
-		text-align:center;
 	}
 	
 	#service{
@@ -160,11 +159,17 @@
 		body{
 			background:none;
 		}
+		#doc{
+			width:100%;
+		}
 	}
 </style>
 </head>
-<div class="noPrint"><button onclick="window.print();"><img src="print.png" width="40px" height="auto"/><br>Imprimer</button></div>
-<div id="page"><img src="doc.jpg" width="800px" height="1132px"/></div>
+<div class="noPrint">
+	départ <input type="date" id="input_depart" onclick="fill_depart()"><br><br>
+	reprise <input type="date" id="input_depart" onclick="fill_reprise()"><br><br>
+	<button onclick="window.print();"><img src="print.png" width="40px" height="auto"/><br>Imprimer</button></div>
+<div id="page"><img src="doc.jpg" width="800px" height="1132px" id="doc"/></div>
 <div id="service" contenteditable="true" class="red">Médiathèque</div>
 <div id="service2">Médiathèque</div>
 <div id="code" contenteditable="true" class="red">&nbsp;&nbsp;&nbsp;&nbsp;</div>
@@ -186,45 +191,57 @@
 <div id="date" contenteditable="true" class="red">18/05/21</div>
 
 <script>
-var service=document.getElementById("service");
-var service2=document.getElementById("service2");
-var code=document.getElementById("code");
-var code2=document.getElementById("code2");
-var nom=document.getElementById("nom");
-var nom2=document.getElementById("nom2");
-var prenom=document.getElementById("prenom");
-var prenom2=document.getElementById("prenom2");
-var depart=document.getElementById("depart");
-var depart2=document.getElementById("depart2");
-var reprise=document.getElementById("reprise");
-var reprise2=document.getElementById("reprise2");
-var conge=document.getElementById("conge");
-var conge2=document.getElementById("conge2");
-var absence=document.getElementById("absence");
-var absence2=document.getElementById("absence2");
-var observations=document.getElementById("observations");
-var observations2=document.getElementById("observations2");
+	var input_depart=document.getElementById("input_depart");
+	var input_reprise=document.getElementById("input_reprise");
+	var service=document.getElementById("service");
+	var service2=document.getElementById("service2");
+	var code=document.getElementById("code");
+	var code2=document.getElementById("code2");
+	var nom=document.getElementById("nom");
+	var nom2=document.getElementById("nom2");
+	var prenom=document.getElementById("prenom");
+	var prenom2=document.getElementById("prenom2");
+	var depart=document.getElementById("depart");
+	var depart2=document.getElementById("depart2");
+	var reprise=document.getElementById("reprise");
+	var reprise2=document.getElementById("reprise2");
+	var conge=document.getElementById("conge");
+	var conge2=document.getElementById("conge2");
+	var absence=document.getElementById("absence");
+	var absence2=document.getElementById("absence2");
+	var observations=document.getElementById("observations");
+	var observations2=document.getElementById("observations2");
 
-var d=new Date();
-var n=d.getDate();
-var m=d.getMonth()+1;
-var y=d.getFullYear();
-var date=document.getElementById("date");
-if(m<10){m="0"+m;}
-date.innerHTML=n+"/"+m+"/"+String(y).substr(2,2);
+	var d=new Date();
+	var n=d.getDate();
+	var m=d.getMonth()+1;
+	var y=d.getFullYear();
+	var date=document.getElementById("date");
 
-document.addEventListener("keyup",update);
-function update(){
-service2.innerHTML=service.innerHTML;
-code2.innerHTML=code.innerHTML;
-nom2.innerHTML=nom.innerHTML;
-prenom2.innerHTML=prenom.innerHTML;
-depart2.innerHTML=depart.innerHTML;
-reprise2.innerHTML=reprise.innerHTML;
-conge2.innerHTML=conge.innerHTML;
-absence2.innerHTML=absence.innerHTML;
-observations2.innerHTML=observations.innerHTML;
-}
+	if(m<10){m="0"+m;}
+	date.innerHTML=n+"/"+m+"/"+String(y).substr(2,2);
+
+	document.addEventListener("keyup",update);
+
+	function update(){
+		service2.innerHTML=service.innerHTML;
+		code2.innerHTML=code.innerHTML;
+		nom2.innerHTML=nom.innerHTML;
+		prenom2.innerHTML=prenom.innerHTML;
+		depart2.innerHTML=depart.innerHTML;
+		reprise2.innerHTML=reprise.innerHTML;
+		conge2.innerHTML=conge.innerHTML;
+		absence2.innerHTML=absence.innerHTML;
+		observations2.innerHTML=observations.innerHTML;
+	}
+
+	function fill_depart(){
+		String(input_depart.value)=depart.innerHTML;
+	}
+
+	function fill_reprise(){
+		input_reprise.value=reprise.innerHTML;
+	}
 </script>
 
 </body>
