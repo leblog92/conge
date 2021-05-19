@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Demande de congés</title>
+<style>
+	html,body{
+		height:100%;
+		margin:0;
+	}
+	
+	.red{
+		border:1px solid red;
+	}
+
+	.noPrint{
+		text-align:center;
+		position:fixed;
+		top:8px;
+		right:8px;
+	}
+	
+	body{
+		font-size:0.8em;
+		font-family:Arial;
+		background:
+		linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
+		linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),
+		linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
+		background-attachment:fixed;
+	}
+
+	#page{
+		width:800px;
+		height:1132px;
+		text-align:center;
+	}
+	
+	#service{
+		left:545px;
+		top:26px;
+		position:absolute;
+	}
+	
+	#code{
+		left:575px;
+		top:44px;
+		position:absolute;
+	}
+	
+	#nom{
+		left:66px;
+		top:124px;
+		position:absolute;
+	}
+
+	#prenom{
+		left:447px;
+		top:124px;
+		position:absolute;
+	}
+
+	#depart{
+		left:125px;
+		top:150px;
+		position:absolute;
+	}
+
+	#reprise{
+		left:500px;
+		top:150px;
+		position:absolute;
+	}
+
+	#conge{
+		left:186px;
+		top:195px;
+		position:absolute;
+	}
+
+	#absence{
+		left:408px;
+		top:195px;
+		position:absolute;
+	}
+
+	#observations{
+		left:22px;
+		top:234px;
+		position:absolute;
+	}
+	
+	#date{
+		left:65px;
+		top:370px;
+		position:absolute;
+	}
+	
+	#service2{
+		left:545px;
+		top:595px;
+		position:absolute;
+	}
+	
+	#code2{
+		left:575px;
+		top:613px;
+		position:absolute;
+	}
+	
+	#nom2{
+		left:66px;
+		top:703px;
+		position:absolute;
+	}
+
+	#prenom2{
+		left:460px;
+		top:703px;
+		position:absolute;
+	}
+
+	#depart2{
+		left:125px;
+		top:729px;
+		position:absolute;
+	}
+
+	#reprise2{
+		left:510px;
+		top:729px;
+		position:absolute;
+	}
+
+	#conge2{
+		left:184px;
+		top:777px;
+		position:absolute;
+	}
+
+	#absence2{
+		left:410px;
+		top:777px;
+		position:absolute;
+	}
+
+	#observations2{
+		left:22px;
+		top:816px;
+		position:absolute;
+	}
+	
+	@media print{
+		.red{
+			border:none;
+		}
+		.noPrint{
+			display:none;
+		}
+		body{
+			background:none;
+		}
+	}
+</style>
+</head>
+<div class="noPrint"><button onclick="window.print();"><img src="print.png" width="40px" height="auto"/><br>Imprimer</button></div>
+<div id="page"><img src="doc.jpg" width="800px" height="1132px"/></div>
+<div id="service" contenteditable="true" class="red">Médiathèque</div>
+<div id="service2">Médiathèque</div>
+<div id="code" contenteditable="true" class="red">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+<div id="code2"></div>
+<div id="nom" contenteditable="true" class="red">NOM</div>
+<div id="nom2">NOM</div>
+<div id="prenom" contenteditable="true" class="red">Prénom</div>
+<div id="prenom2">Prénom</div>
+<div id="depart" contenteditable="true" class="red">01/01/21</div>
+<div id="depart2">01/01/21</div>
+<div id="reprise" contenteditable="true" class="red">01/01/21</div>
+<div id="reprise2">01/01/21</div>
+<div id="conge" contenteditable="true" class="red">X</div>
+<div id="conge2">X</div>
+<div id="absence" contenteditable="true" class="red">&nbsp;</div>
+<div id="absence2">&nbsp;</div>
+<div id="observations" contenteditable="true" class="red">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+<div id="observations2">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+<div id="date" contenteditable="true" class="red">18/05/21</div>
+
+<script>
+var service=document.getElementById("service");
+var service2=document.getElementById("service2");
+var code=document.getElementById("code");
+var code2=document.getElementById("code2");
+var nom=document.getElementById("nom");
+var nom2=document.getElementById("nom2");
+var prenom=document.getElementById("prenom");
+var prenom2=document.getElementById("prenom2");
+var depart=document.getElementById("depart");
+var depart2=document.getElementById("depart2");
+var reprise=document.getElementById("reprise");
+var reprise2=document.getElementById("reprise2");
+var conge=document.getElementById("conge");
+var conge2=document.getElementById("conge2");
+var absence=document.getElementById("absence");
+var absence2=document.getElementById("absence2");
+var observations=document.getElementById("observations");
+var observations2=document.getElementById("observations2");
+
+var d=new Date();
+var n=d.getDate();
+var m=d.getMonth()+1;
+var y=d.getFullYear();
+var date=document.getElementById("date");
+if(m<10){m="0"+m;}
+date.innerHTML=n+"/"+m+"/"+String(y).substr(2,2);
+
+document.addEventListener("keyup",update);
+function update(){
+service2.innerHTML=service.innerHTML;
+code2.innerHTML=code.innerHTML;
+nom2.innerHTML=nom.innerHTML;
+prenom2.innerHTML=prenom.innerHTML;
+depart2.innerHTML=depart.innerHTML;
+reprise2.innerHTML=reprise.innerHTML;
+conge2.innerHTML=conge.innerHTML;
+absence2.innerHTML=absence.innerHTML;
+observations2.innerHTML=observations.innerHTML;
+}
+</script>
+
+</body>
+</html>
