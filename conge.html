@@ -1,248 +1,337 @@
 <!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Demande de congés</title>
-<style>
-	html,body{
-		height:100%;
-		margin:0;
-	}
-	
-	.red{
-		border:1px solid red;
-	}
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<title>Demande de congé</title>
+		<link rel="icon" type="image/png" href="favicon.png" />
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<style>
+			html,body{
+				height:100%;
+				margin:0;
+			}
 
-	.noPrint{
-		text-align:right;
-		position:fixed;
-		top:8px;
-		right:8px;
-	}
-	
-	body{
-		font-size:0.8em;
-		font-family:Arial;
-		background:
-		linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
-		linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),
-		linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
-		background-attachment:fixed;
-	}
+			body{
+				font-size:0.8em;
+				font-family:Arial;
+				background:
+				linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
+				linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),
+				linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
+				background-attachment:fixed;
+			}
 
-	#page{
-		width:800px;
-		height:1132px;
-	}
-	
-	#service{
-		left:545px;
-		top:26px;
-		position:absolute;
-	}
-	
-	#code{
-		left:575px;
-		top:44px;
-		position:absolute;
-	}
-	
-	#nom{
-		left:66px;
-		top:124px;
-		position:absolute;
-	}
+			button{
+				width:190px;
+				padding:10px;
+				border-radius:10px;
+			}
 
-	#prenom{
-		left:447px;
-		top:124px;
-		position:absolute;
-	}
+			.red{
+				min-width:10px;
+				min-height:10px;
+				border:1px solid red;
+			}
 
-	#depart{
-		left:125px;
-		top:150px;
-		position:absolute;
-	}
+			.noPrint{
+				background:rgba(255,255,255,0.3);
+				border-radius:10px;
+				padding:8px;
+				text-align:right;
+				position:fixed;
+				top:8px;
+				left:816px;
+			}
 
-	#reprise{
-		left:500px;
-		top:150px;
-		position:absolute;
-	}
+			#page{
+				width:800px;
+				height:1132px;
+				box-shadow:10px 10px 40px rgba(0,0,0,0.8);
+			}
 
-	#conge{
-		left:186px;
-		top:195px;
-		position:absolute;
-	}
+			#texture{
+				user-select:none;
+				position:absolute;
+				top:0;
+				left:0;
+				width:800px;
+				height:1132px;
+			}
 
-	#absence{
-		left:408px;
-		top:195px;
-		position:absolute;
-	}
+			#service{
+				left:545px;
+				top:23px;
+				position:absolute;
+			}
+			
+			#code{
+				left:575px;
+				top:44px;
+				position:absolute;
+			}
 
-	#observations{
-		left:22px;
-		top:234px;
-		position:absolute;
-	}
-	
-	#date{
-		left:65px;
-		top:370px;
-		position:absolute;
-	}
-	
-	#service2{
-		left:545px;
-		top:595px;
-		position:absolute;
-	}
-	
-	#code2{
-		left:575px;
-		top:613px;
-		position:absolute;
-	}
-	
-	#nom2{
-		left:66px;
-		top:703px;
-		position:absolute;
-	}
+			#nom{
+				user-select:all;
+				text-transform: uppercase;
+				left:66px;
+				top:122px;
+				position:absolute;
+			}
 
-	#prenom2{
-		left:460px;
-		top:703px;
-		position:absolute;
-	}
+			#prenom{
+				text-transform:capitalize;
+				left:447px;
+				top:122px;
+				position:absolute;
+			}
 
-	#depart2{
-		left:125px;
-		top:729px;
-		position:absolute;
-	}
+			#depart{
+				left:125px;
+				top:148px;
+				position:absolute;
+			}
 
-	#reprise2{
-		left:510px;
-		top:729px;
-		position:absolute;
-	}
+			#reprise{
+				left:500px;
+				top:148px;
+				position:absolute;
+			}
 
-	#conge2{
-		left:184px;
-		top:777px;
-		position:absolute;
-	}
+			#conge{
+				user-select:none;
+				left:186px;
+				top:195px;
+				position:absolute;
+			}
 
-	#absence2{
-		left:410px;
-		top:777px;
-		position:absolute;
-	}
+			#absence{
+				user-select:none;
+				left:408px;
+				top:195px;
+				position:absolute;
+			}
 
-	#observations2{
-		left:22px;
-		top:816px;
-		position:absolute;
-	}
-	
-	@media print{
-		.red{
-			border:none;
-		}
-		.noPrint{
-			display:none;
-		}
-		body{
-			background:none;
-		}
-		#doc{
-			width:100%;
-		}
-	}
-</style>
-</head>
-<div class="noPrint">
-	départ <input type="date" id="input_depart" onclick="fill_depart()"><br><br>
-	reprise <input type="date" id="input_depart" onclick="fill_reprise()"><br><br>
-	<button onclick="window.print();"><img src="print.png" width="40px" height="auto"/><br>Imprimer</button></div>
-<div id="page"><img src="doc.jpg" width="800px" height="1132px" id="doc"/></div>
-<div id="service" contenteditable="true" class="red">Médiathèque</div>
-<div id="service2">Médiathèque</div>
-<div id="code" contenteditable="true" class="red">&nbsp;&nbsp;&nbsp;&nbsp;</div>
-<div id="code2"></div>
-<div id="nom" contenteditable="true" class="red">NOM</div>
-<div id="nom2">NOM</div>
-<div id="prenom" contenteditable="true" class="red">Prénom</div>
-<div id="prenom2">Prénom</div>
-<div id="depart" contenteditable="true" class="red">01/01/21</div>
-<div id="depart2">01/01/21</div>
-<div id="reprise" contenteditable="true" class="red">01/01/21</div>
-<div id="reprise2">01/01/21</div>
-<div id="conge" contenteditable="true" class="red">X</div>
-<div id="conge2">X</div>
-<div id="absence" contenteditable="true" class="red">&nbsp;</div>
-<div id="absence2">&nbsp;</div>
-<div id="observations" contenteditable="true" class="red">&nbsp;&nbsp;&nbsp;&nbsp;</div>
-<div id="observations2">&nbsp;&nbsp;&nbsp;&nbsp;</div>
-<div id="date" contenteditable="true" class="red">18/05/21</div>
+			#observations{
+				left:22px;
+				top:230px;
+				position:absolute;
+				line-height:1.6em;
+			}
 
-<script>
-	var input_depart=document.getElementById("input_depart");
-	var input_reprise=document.getElementById("input_reprise");
-	var service=document.getElementById("service");
-	var service2=document.getElementById("service2");
-	var code=document.getElementById("code");
-	var code2=document.getElementById("code2");
-	var nom=document.getElementById("nom");
-	var nom2=document.getElementById("nom2");
-	var prenom=document.getElementById("prenom");
-	var prenom2=document.getElementById("prenom2");
-	var depart=document.getElementById("depart");
-	var depart2=document.getElementById("depart2");
-	var reprise=document.getElementById("reprise");
-	var reprise2=document.getElementById("reprise2");
-	var conge=document.getElementById("conge");
-	var conge2=document.getElementById("conge2");
-	var absence=document.getElementById("absence");
-	var absence2=document.getElementById("absence2");
-	var observations=document.getElementById("observations");
-	var observations2=document.getElementById("observations2");
+			#date{
+				left:65px;
+				top:370px;
+				position:absolute;
+			}
 
-	var d=new Date();
-	var n=d.getDate();
-	var m=d.getMonth()+1;
-	var y=d.getFullYear();
-	var date=document.getElementById("date");
+			#service2{
+				left:545px;
+				top:593px;
+				position:absolute;
+			}
 
-	if(m<10){m="0"+m;}
-	date.innerHTML=n+"/"+m+"/"+String(y).substr(2,2);
+			#code2{
+				left:575px;
+				top:613px;
+				position:absolute;
+			}
 
-	document.addEventListener("keyup",update);
+			#nom2{
+				text-transform:uppercase;
+				left:66px;
+				top:703px;
+				position:absolute;
+			}
 
-	function update(){
-		service2.innerHTML=service.innerHTML;
-		code2.innerHTML=code.innerHTML;
-		nom2.innerHTML=nom.innerHTML;
-		prenom2.innerHTML=prenom.innerHTML;
-		depart2.innerHTML=depart.innerHTML;
-		reprise2.innerHTML=reprise.innerHTML;
-		conge2.innerHTML=conge.innerHTML;
-		absence2.innerHTML=absence.innerHTML;
-		observations2.innerHTML=observations.innerHTML;
-	}
+			#prenom2{
+				text-transform:capitalize;
+				left:460px;
+				top:703px;
+				position:absolute;
+			}
 
-	function fill_depart(){
-		String(input_depart.value)=depart.innerHTML;
-	}
+			#depart2{
+				left:125px;
+				top:729px;
+				position:absolute;
+			}
 
-	function fill_reprise(){
-		input_reprise.value=reprise.innerHTML;
-	}
-</script>
+			#reprise2{
+				left:510px;
+				top:729px;
+				position:absolute;
+			}
 
-</body>
+			#conge2{
+				left:184px;
+				top:777px;
+				position:absolute;
+			}
+
+			#absence2{
+				left:410px;
+				top:777px;
+				position:absolute;
+			}
+
+			#observations2{
+				left:22px;
+				top:816px;
+				position:absolute;
+				line-height:1.6em;
+			}
+
+			@media print{
+				body{
+					background:none;
+				}
+
+				.red{
+					border:none;
+				}
+
+				.noPrint{
+					display:none;
+				}
+
+				#doc{
+					width:100%;
+				}
+
+				#page{
+					box-shadow:0 0;
+				}
+				
+				#texture{
+					opacity:0;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="noPrint">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 318 83" width="188px">
+				<mask id="hide">
+					<rect width="318" height="82" fill="#000"/>
+					<g fill="#fff">
+						<path id="title" d="M 0.00,0.00 C 0.00,0.00 41.00,0.00 41.00,0.00 51.62,0.13 60.65,2.69 67.79,11.00 72.63,16.64 74.13,22.86 75.13,30.00 76.98,43.16 76.42,61.74 66.90,71.98 59.11,80.36 49.93,81.98 39.00,82.00 39.00,82.00 0.00,82.00 0.00,82.00 0.00,82.00 0.00,29.00 0.00,29.00 0.00,29.00 23.00,29.00 23.00,29.00 23.00,29.00 23.00,49.00 23.00,49.00 23.01,51.54 22.68,55.48 24.60,57.40 27.90,60.70 43.21,59.06 46.81,56.30 54.31,50.58 54.40,32.69 47.66,26.42 43.84,22.85 38.85,23.01 34.00,23.00 34.00,23.00 0.00,23.00 0.00,23.00 0.00,23.00 0.00,0.00 0.00,0.00 Z M 81.00,0.00 C 81.00,0.00 122.00,0.00 122.00,0.00 132.62,0.13 141.65,2.69 148.79,11.00 153.63,16.64 155.13,22.86 156.13,30.00 157.98,43.16 157.42,61.74 147.90,71.98 140.11,80.36 130.93,81.98 120.00,82.00 120.00,82.00 81.00,82.00 81.00,82.00 81.00,82.00 81.00,29.00 81.00,29.00 81.00,29.00 104.00,29.00 104.00,29.00 104.00,29.00 104.00,49.00 104.00,49.00 104.01,51.54 103.68,55.48 105.60,57.40 108.90,60.70 124.21,59.06 127.81,56.30 135.31,50.58 135.40,32.69 128.66,26.42 124.84,22.85 119.85,23.01 115.00,23.00 115.00,23.00 81.00,23.00 81.00,23.00 81.00,23.00 81.00,0.00 81.00,0.00 Z M 242.00,56.00 C 240.20,62.16 237.49,65.48 232.99,69.99 220.39,82.58 200.98,85.69 185.00,77.62 171.37,70.75 163.01,56.05 163.01,41.00 163.01,25.95 171.37,11.25 185.00,4.38 200.98,-3.69 220.39,-0.58 232.99,12.01 237.49,16.52 240.20,19.84 242.00,26.00 242.00,26.00 220.00,35.00 220.00,35.00 218.25,31.74 216.95,29.75 213.98,27.39 201.35,17.33 187.47,29.69 186.64,40.00 186.09,46.76 191.25,53.55 197.00,56.56 202.91,59.65 208.83,58.65 213.99,54.61 216.38,52.73 219.12,48.84 222.09,48.52 224.91,48.23 237.66,54.76 242.00,56.00 Z M 248.00,0.00 C 248.00,0.00 318.00,0.00 318.00,0.00 318.00,0.00 318.00,23.00 318.00,23.00 318.00,23.00 248.00,23.00 248.00,23.00 248.00,23.00 248.00,0.00 248.00,0.00 Z M 248.00,29.00 C 248.00,29.00 306.00,29.00 306.00,29.00 306.00,29.00 306.00,52.00 306.00,52.00 306.00,52.00 280.00,52.00 280.00,52.00 280.00,52.00 272.60,53.60 272.60,53.60 272.60,53.60 271.00,62.00 271.00,62.00 271.00,62.00 271.00,82.00 271.00,82.00 271.00,82.00 248.00,82.00 248.00,82.00 248.00,82.00 248.00,29.00 248.00,29.00 Z"/>
+					</g>
+				</mask>
+				<g style="mask:url(#hide)">
+					<g>
+						<image width="318" height="82" xlink:href="rainbow.gif" preserveAspectRatio="none"/>
+						<image x="-317" width="318" height="82" xlink:href="rainbow.gif" preserveAspectRatio="none"/>
+						<animateMotion begin="0s" dur="6s" repeatCount="indefinite" values="0,0;318,0"/>
+					</g>
+				</g>
+			</svg><br>
+			Demande De Congé Facilitée<sup>©</sup><br><br>
+			départ <input type="date" id="input_depart" onchange="fill_depart();"><br><br>
+			reprise <input type="date" id="input_reprise" onchange="fill_reprise();"><br><br>
+			<button onclick="window.print();">Imprimer</button><br><br>
+			<img width="188px" height="auto" src="anim.gif" style="border-radius:10px"/>
+		</div>
+		<div id="page"><img src="doc.jpg" width="800px" height="1132px" id="doc"/></div>
+		<img src="crumbled.png" id="texture"/>
+		<div id="service" contenteditable="true" class="red">Médiathèque</div>
+		<div id="service2">Médiathèque</div>
+		<div id="code" contenteditable="true" class="red" style="width:80px"></div>
+		<div id="code2"></div>
+		<div id="nom" contenteditable="true" class="red">NOM</div>
+		<div id="nom2">NOM</div>
+		<div id="prenom" contenteditable="true" class="red">Prénom</div>
+		<div id="prenom2">Prénom</div>
+		<div id="depart" contenteditable="true" class="red" style="width:200px">- - / - - / - -</div>
+		<div id="depart2">- - / - - / - -</div>
+		<div id="reprise" contenteditable="true" class="red" style="width:200px">- - / - - / - -</div>
+		<div id="reprise2">- - / - - / - -</div>
+		<div id="conge" class="red" onclick="check_conge();"></div>
+		<div id="conge2"></div>
+		<div id="absence" class="red" onclick="check_absence();"></div>
+		<div id="absence2"></div>
+		<div id="observations" contenteditable="true" class="red" style="width:750px;height:40px;"></div>
+		<div id="observations2"></div>
+		<div id="date" contenteditable="true" class="red">18/05/21</div>
+
+		<script>
+			var input_depart=document.getElementById("input_depart");
+			var input_reprise=document.getElementById("input_reprise");
+			var service=document.getElementById("service");
+			var service2=document.getElementById("service2");
+			var code=document.getElementById("code");
+			var code2=document.getElementById("code2");
+			var nom=document.getElementById("nom");
+			var nom2=document.getElementById("nom2");
+			var prenom=document.getElementById("prenom");
+			var prenom2=document.getElementById("prenom2");
+			var depart=document.getElementById("depart");
+			var depart2=document.getElementById("depart2");
+			var reprise=document.getElementById("reprise");
+			var reprise2=document.getElementById("reprise2");
+			var conge=document.getElementById("conge");
+			var conge2=document.getElementById("conge2");
+			var absence=document.getElementById("absence");
+			var absence2=document.getElementById("absence2");
+			var observations=document.getElementById("observations");
+			var observations2=document.getElementById("observations2");
+			var d=new Date();
+			var n=d.getDate();
+			var m=d.getMonth()+1;
+			var y=d.getFullYear();
+			var date=document.getElementById("date");
+			var jour=["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"];
+			var mois=["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+
+			if(m<10){m="0"+m;}
+			date.innerHTML=n+"/"+m+"/"+String(y).substr(2,2);
+
+			document.addEventListener("keyup",update);
+
+			function update(){
+				service2.innerHTML=service.innerHTML;
+				code2.innerHTML=code.innerHTML;
+				nom2.innerHTML=nom.innerHTML;
+				prenom2.innerHTML=prenom.innerHTML;
+				depart2.innerHTML=depart.innerHTML;
+				reprise2.innerHTML=reprise.innerHTML;
+				conge2.innerHTML=conge.innerHTML;
+				absence2.innerHTML=absence.innerHTML;
+				observations2.innerHTML=observations.innerHTML;
+			}
+
+			function fill_depart(){
+				var d1=new Date(input_depart.value);
+				var j1=d1.getDay();
+				var n1=d1.getDate();
+				var m1=d1.getMonth();
+				var y1=d1.getFullYear();
+				depart.innerHTML=jour[j1]+" "+n1+" "+mois[m1]+" "+y1;
+				depart2.innerHTML=jour[j1]+" "+n1+" "+mois[m1]+" "+y1;
+			}
+
+			function fill_reprise(){
+				var d2=new Date(input_reprise.value);
+				var j2=d2.getDay();
+				var n2=d2.getDate();
+				var m2=d2.getMonth();
+				var y2=d2.getFullYear();
+				reprise.innerHTML=jour[j2]+" "+n2+" "+mois[m2]+" "+y2;
+				reprise2.innerHTML=jour[j2]+" "+n2+" "+mois[m2]+" "+y2;
+			}
+
+			function check_conge(){
+				conge.innerHTML="X";
+				conge2.innerHTML="X";
+				absence.innerHTML="";
+				absence2.innerHTML="";
+			}
+
+			function check_absence(){
+				conge.innerHTML="";
+				conge2.innerHTML="";
+				absence.innerHTML="X";
+				absence2.innerHTML="X";
+			}
+		</script>
+	</body>
 </html>
