@@ -35,6 +35,7 @@
 
 			.noPrint{
 				background:rgba(255,255,255,0.3);
+				border:1px solid #fff;
 				border-radius:10px;
 				padding:8px;
 				text-align:right;
@@ -206,11 +207,24 @@
 					opacity:0;
 				}
 			}
+
+			table,td{
+				user-select:none;
+				text-align:center;
+				width:100%;
+				border:1px solid #888;
+				border-collapse:collapse;
+				padding:4px;
+			}
+
+			table{
+			background:rgba(255,255,255,0.5);
+			}
 		</style>
 	</head>
 	<body>
 		<div class="noPrint">
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 318 83" width="188px">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 318 83" width="188px" height="49px">
 				<mask id="hide">
 					<rect width="318" height="82" fill="#000"/>
 					<g fill="#fff">
@@ -226,6 +240,34 @@
 				</g>
 			</svg><br>
 			Demande De Congé Facilitée<sup>©</sup><br><br>
+			<table>
+				<tbody>
+					<tr onclick="AH();">
+						<td>Aurélie HAMMOUDI</td>
+					</tr>
+					<tr onclick="AP();">
+						<td>Aurélie POULARD</td>
+					</tr>
+					<tr onclick="BB();">
+						<td>Béatrice BRANNELLEC</td>
+					</tr>
+					<tr onclick="JF();">
+						<td>Joanne FAISSE</td>
+					</tr>
+					<tr onclick="MK();">
+						<td>Matthieu KLEIN</td>
+					</tr>
+					<tr onclick="NH();">
+						<td>Nathalie HANNA MORRELLINI</td>
+					</tr>
+					<tr onclick="NJ();">
+						<td>Nicolas JODIN</td>
+					</tr>
+					<tr onclick="ZC();">
+						<td>Zacharie CARON</td>
+					</tr>
+				</tbody>
+			</table><br>
 			départ <input type="date" id="input_depart" onchange="fill_depart();"><br><br>
 			reprise <input type="date" id="input_reprise" onchange="fill_reprise();"><br><br>
 			<button onclick="window.print();">Imprimer</button><br><br>
@@ -233,20 +275,20 @@
 		</div>
 		<div id="page"><img src="doc.jpg" width="800px" height="1132px" id="doc"/></div>
 		<img src="crumbled.png" id="texture"/>
-		<div id="service" contenteditable="true" class="red">Médiathèque</div>
+		<div id="service" contenteditable="true" class="red" style="width:200px">Médiathèque</div>
 		<div id="service2">Médiathèque</div>
-		<div id="code" contenteditable="true" class="red" style="width:80px"></div>
+		<div id="code" contenteditable="true" class="red" style="width:170px"></div>
 		<div id="code2"></div>
-		<div id="nom" contenteditable="true" class="red">NOM</div>
+		<div id="nom" contenteditable="true" class="red" style="width:280px">NOM</div>
 		<div id="nom2">NOM</div>
-		<div id="prenom" contenteditable="true" class="red">Prénom</div>
+		<div id="prenom" contenteditable="true" class="red" style="width:290px">Prénom</div>
 		<div id="prenom2">Prénom</div>
-		<div id="depart" contenteditable="true" class="red" style="width:200px">- - / - - / - -</div>
-		<div id="depart2">- - / - - / - -</div>
-		<div id="reprise" contenteditable="true" class="red" style="width:200px">- - / - - / - -</div>
-		<div id="reprise2">- - / - - / - -</div>
-		<div id="conge" class="red" onclick="check_conge();"></div>
-		<div id="conge2"></div>
+		<div id="depart" contenteditable="true" class="red" style="width:220px"></div>
+		<div id="depart2"></div>
+		<div id="reprise" contenteditable="true" class="red" style="width:235px"></div>
+		<div id="reprise2"></div>
+		<div id="conge" class="red" onclick="check_conge();">X</div>
+		<div id="conge2">X</div>
 		<div id="absence" class="red" onclick="check_absence();"></div>
 		<div id="absence2"></div>
 		<div id="observations" contenteditable="true" class="red" style="width:750px;height:40px;"></div>
@@ -331,6 +373,79 @@
 				conge2.innerHTML="";
 				absence.innerHTML="X";
 				absence2.innerHTML="X";
+			}
+			
+			function AH(){
+				nom.innerHTML="HAMMOUDI";
+				nom2.innerHTML="HAMMOUDI";
+				prenom.innerHTML="Aurélie";
+				prenom2.innerHTML="Aurélie";
+				observations.innerHTML="";
+				observations2.innerHTML="";
+			}
+			
+			function AP(){
+				nom.innerHTML="POULARD";
+				nom2.innerHTML="POULARD";
+				prenom.innerHTML="Aurélie";
+				prenom2.innerHTML="Aurélie";
+				observations.innerHTML="";
+				observations2.innerHTML="";
+			}
+			
+			function BB(){
+				nom.innerHTML="BRANNELLEC";
+				nom2.innerHTML="BRANNELLEC";
+				prenom.innerHTML="Béatrice";
+				prenom2.innerHTML="Béatrice";
+				observations.innerHTML="";
+				observations2.innerHTML="";
+			}
+
+			function JF(){
+				nom.innerHTML="FAISSE";
+				nom2.innerHTML="FAISSE";
+				prenom.innerHTML="Joanne";
+				prenom2.innerHTML="Joanne";
+				observations.innerHTML="";
+				observations2.innerHTML="";
+			}
+
+			function MK(){
+				code.innerHTML="...";
+				nom.innerHTML="KLEIN";
+				nom2.innerHTML="KLEIN";
+				prenom.innerHTML="Matthieu";
+				prenom2.innerHTML="Matthieu";
+				observations.innerHTML="travaille le samedi, repos le lundi";
+				observations2.innerHTML="travaille le samedi, repos le lundi";
+			}
+
+			function NH(){
+				nom.innerHTML="HANNA MORRELLINI";
+				nom2.innerHTML="HANNA MORRELLINI";
+				prenom.innerHTML="Nathalie";
+				prenom2.innerHTML="Nathalie";
+				observations.innerHTML="";
+				observations2.innerHTML="";
+			}
+
+			function NJ(){
+				nom.innerHTML="JODIN";
+				nom2.innerHTML="JODIN";
+				prenom.innerHTML="Nicolas";
+				prenom2.innerHTML="Nicolas";
+				observations.innerHTML="";
+				observations2.innerHTML="";
+			}
+
+			function ZC(){
+				nom.innerHTML="CARON";
+				nom2.innerHTML="CARON";
+				prenom.innerHTML="Zacharie";
+				prenom2.innerHTML="Zacharie";
+				observations.innerHTML="";
+				observations2.innerHTML="";
 			}
 		</script>
 	</body>
